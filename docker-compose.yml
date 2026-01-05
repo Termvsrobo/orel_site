@@ -1,0 +1,76 @@
+services:
+  db:
+    restart: always
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=titanium_items
+      - POSTGRES_USER=titanium_items
+      - POSTGRES_PASSWORD=titanium_items_127238
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d titanium_items -U titanium_items"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+  web:
+    restart: always
+    build: .
+    ports:
+      - 8000:8000
+    command: sh -c "alembic upgrade head && uvicorn --host 0.0.0.0 main:app"
+    healthcheck:
+      test: curl --fail http://localhost:8000/docs || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      - db
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+
+  celery-beat:
+    restart: always
+    build: .
+    command: celery -A celery_app:celery_app worker -B
+    depends_on:
+      - db
+      - redis
+
+  celery-flower:
+    restart: always
+    build: .
+    ports:
+      - 5555:5555
+    command: celery -A celery_app:celery_app flower --port=5555
+    depends_on:
+      - celery-beat
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80    # HTTP (для валидации Certbot)
+      - 443:443  # HTTPS
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d          # Nginx конфиг
+      - ./certbot/www:/var/www/certbot            # Certbot HTTP challenge
+      - ./certbot/conf:/etc/letsencrypt           # SSL certificates
+    restart: unless-stopped
+    depends_on:
+      - web
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email termvsrobo@yandex.ru --agree-tos -d орелсельхоззапчасть.рф
+    restart: unless-stopped
+
+volumes:
+  db_data:

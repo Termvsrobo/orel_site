@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+
+{% block body_container %}
+    <div class="row">
+    {% for item in items %}
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top" src="/static/istockphoto-1431891647-612x612.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">{{ item.name }}</h4>
+                    <p class="card-text">{{ item.in_stock }}</p>
+                    <p class="card-text">{{ item.current_price }}</p>
+                    <a href="/items/{{ item.name }}" class="btn btn-primary">Открыть</a>
+                </div>
+            </div>
+        </div>
+    {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}
+
+{% block pagination %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if page==1 %}
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page=2">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page=3">3</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page - 1 }}">{{ page - 1 }}</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page + 1 }}">{{ page + 1 }}</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}
