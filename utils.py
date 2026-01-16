@@ -1,3 +1,4 @@
+from itertools import product
 from typing import Dict, List
 
 from cachetools import cached, TTLCache
@@ -79,11 +80,18 @@ def get_data(content) -> List[Dict[str, str]]:
     soup = BeautifulSoup(content, "html.parser")
     elements = soup.find_all(attrs={"class": "item_info"})
     for element in elements:
-        name = element.find(
-            attrs={"class": "dark_link js-notice-block__title option-font-bold font_sm"}
-        ).span.text
-        if name:
-            name = name.split()[0]
+        name_element = element.find(
+            attrs={"class": "muted font_sxs"}
+        )
+        name = None
+        if name_element:
+            name = name_element.text.replace('Арт.: ', '')
+            for to_replace in product('TТ', repeat=2):
+                name = name.replace(''.join(to_replace), '')
+            images = element.parent.find('div', attrs={'class': 'image_wrapper_block js-notice-block__image'}).find_all('img')
+            image_url = None
+            if len(images) >= 2:
+                image_url = images[1].get("data-src")
         in_stock = element.find(attrs={"class": "value font_sxs"}).text
         price_value_element = element.find(attrs={"class": "price_value"})
         if price_value_element:
@@ -99,6 +107,7 @@ def get_data(content) -> List[Dict[str, str]]:
                 "in_stock": in_stock,
                 "price_value": price_value,
                 "price_currency": price_currency,
+                "image_url": image_url,
             }
         )
     return result

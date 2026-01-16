@@ -210,3 +210,7 @@ __marimo__/
 celerybeat-schedule.bak
 celerybeat-schedule.dat
 celerybeat-schedule.dir
+
+media/
+.vscode/
+certbot/

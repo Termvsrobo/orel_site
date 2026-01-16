@@ -28,6 +28,15 @@ services:
       start_period: 30s
     depends_on:
       - db
+    volumes:
+      - ./media:/app/media
+  parse:
+    build: .
+    command: sh -c "python celery_app.py"
+    depends_on:
+      - db
+    volumes:
+      - ./media:/app/media
 
   redis:
     image: redis:latest
@@ -41,6 +50,8 @@ services:
     depends_on:
       - db
       - redis
+    volumes:
+      - ./media:/app/media
 
   celery-flower:
     restart: always

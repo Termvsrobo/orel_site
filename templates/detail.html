@@ -2,8 +2,13 @@
 
 {% block body_container %}
     <div class="row">
+        {% if item.image %}
+        <img class="img-fluid img-thumbnail" src="/{{ item.image }}" alt="{{ item.name }}">
+        {% else %}
+        <img class="img-fluid img-thumbnail" src="/static/istockphoto-1431891647-612x612.jpg" alt="{{ item.name }}">
+        {% endif %}
         <p>{{ item.name }}</p>
         <p>{{ item.in_stock }}</p>
-        <p>{{ item.price_value }}</p>
+        <p><b>{{ item.current_price }} РУБ/шт</b></p>
     </div>
 {% endblock %}

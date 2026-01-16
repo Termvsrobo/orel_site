@@ -1,4 +1,5 @@
 from sqlmodel import SQLModel, Field
+from pydantic import FilePath
 
 from utils import get_current_course
 
@@ -9,6 +10,7 @@ class Item(SQLModel, table=True):
     in_stock: str | None = None
     price_value: float | None = None
     price_currency: str | None = None
+    image: FilePath | None = None
 
     @property
     def current_price(self) -> str:

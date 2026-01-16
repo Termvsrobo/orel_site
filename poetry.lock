@@ -1906,6 +1906,18 @@ files = [
 ]
 
 [[package]]
+name = "sanitize-filename"
+version = "1.2.0"
+description = "A permissive filename sanitizer."
+optional = false
+python-versions = "~=3.7"
+groups = ["main"]
+files = [
+    {file = "sanitize_filename-1.2.0-py3-none-any.whl", hash = "sha256:a5be41a4371c84cb4a666a9c3baa70e1b2086a3e50b86c7ba5dd579f5ad2f330"},
+    {file = "sanitize_filename-1.2.0.tar.gz", hash = "sha256:e75933e96d426e306eef8c270cc24c3e1971d8715288c9776d801d3d8e7b941a"},
+]
+
+[[package]]
 name = "sentry-sdk"
 version = "2.48.0"
 description = "Python client for Sentry (https://sentry.io)"
@@ -2603,4 +2615,4 @@ dev = ["black (>=19.3b0) ; python_version >= \"3.6\"", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4.0"
-content-hash = "b80ba1b30df15409786e854ed334145b5f038b147b24fcb66643626d34929be4"
+content-hash = "bd10dba56cdcc0b36fc4ed48740cd3236d446e5861e8c59eb4b52197a58df476"
