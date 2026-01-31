@@ -15,7 +15,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/media", StaticFiles(directory="media"), name="media")
 
 sitemap = SiteMap(
-    app=app, base_url="https://example.com", gzip=True, include_dynamic=True
+    app=app, base_url="https://орелсельхоззапчасть.рф", gzip=True, include_dynamic=True
 )
 
 templates = Jinja2Templates(directory="templates")
@@ -55,14 +55,16 @@ async def get_item(request: Request, item_name: str):
 
 @app.get("/robots.txt", response_class=PlainTextResponse)
 async def get_robots():
-    data = """User-agent: *\nAllow: /"""
+    data = """User-agent: *\nAllow: /\nSitemap:/sitemap.xml"""
     return data
 
 
 @app.exception_handler(404)
 async def page_not_found(request: Request, exc: Exception):
     return templates.TemplateResponse(
-        request, "not_found.html", {}
+        request,
+        "not_found.html",
+        status_code=404
     )
 
 
