@@ -59,4 +59,11 @@ async def get_robots():
     return data
 
 
+@app.exception_handler(404)
+async def page_not_found(request: Request, exc: Exception):
+    return templates.TemplateResponse(
+        request, "not_found.html", {}
+    )
+
+
 sitemap.attach()

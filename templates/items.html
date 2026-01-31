@@ -1,25 +1,27 @@
 {% extends "index.html" %}
 
 {% block body_container %}
-    <div class="row">
-    {% for item in items %}
-        <div class="col-sm-4">
-            <div class="card">
-                {% if item.image %}
-                <img class="card-img-top" src="/{{ item.image }}" alt="{{ item.name }}">
-                {% else %}
-                <img class="card-img-top" src="/static/istockphoto-1431891647-612x612.jpg" alt="{{ item.name }}">
-                {% endif %}
-                <div class="card-body">
-                    <h4 class="card-title">{{ item.name }}</h4>
-                    <p class="card-text">{{ item.in_stock }}</p>
-                    <p class="card-text"><b>{{ item.current_price }} РУБ/шт</b></p>
-                    <a href="/items/{{ item.name }}" class="btn btn-primary">Открыть</a>
+    <div class="container">
+        <div class="row">
+        {% for item in items %}
+            <div class="col-sm-4 align-self-center">
+                <div class="card"  style="width: 18rem; height: 24rem;">
+                    {% if item.image %}
+                    <img class="card-img-top" src="/{{ item.image }}" alt="{{ item.name }}">
+                    {% else %}
+                    <img class="card-img-top" src="/static/istockphoto-1431891647-612x612.jpg" alt="{{ item.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ item.name }}</h4>
+                        <p class="card-text">{{ item.in_stock }}</p>
+                        <p class="card-text"><b>{{ item.current_price }} РУБ/шт</b></p>
+                        <a href="/items/{{ item.name }}" class="btn btn-primary">Открыть</a>
+                    </div>
                 </div>
             </div>
+        {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
+        {% endfor %}
         </div>
-    {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
-    {% endfor %}
     </div>
 {% endblock %}
 
