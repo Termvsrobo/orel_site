@@ -1,15 +1,14 @@
 {% extends "index.html" %}
 
 {% block body_container %}
-    <div class="container">
-        <div class="row">
+        <div class="row p-3">
         {% for item in items %}
-            <div class="col-sm-4 align-self-center">
-                <div class="card"  style="width: 18rem; height: 24rem;">
+            <div class="col-4 align-self-center">
+                <div class="card">
                     {% if item.image %}
                     <img class="card-img-top" src="/{{ item.image }}" alt="{{ item.name }}">
                     {% else %}
-                    <img class="card-img-top" src="/static/istockphoto-1431891647-612x612.jpg" alt="{{ item.name }}">
+                    <img class="card-img-top" src="/static/no_image.jpeg" alt="{{ item.name }}">
                     {% endif %}
                     <div class="card-body">
                         <h4 class="card-title">{{ item.name }}</h4>
@@ -19,10 +18,9 @@
                     </div>
                 </div>
             </div>
-        {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
+        {% if loop.index % 3 == 0 %}</div><div class="row p-3">{% endif %}
         {% endfor %}
         </div>
-    </div>
 {% endblock %}
 
 {% block pagination %}
@@ -38,7 +36,44 @@
             <li class="page-item">
                 <a class="page-link" href="?page=3">3</a>
             </li>
+            <li class="page-item">
+                <a class="page-link" href="#">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ last_page }}">{{ last_page }}</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="?page={{ page + 1 }}">Следующая</a></li>
+            {% elif page==last_page %}
+            <li class="page-item"><a class="page-link" href="?page={{ page - 1 }}">Предыдущая</a></li>
+            <li class="page-item">
+                <a class="page-link" href="?page=1">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ last_page - 2 }}">{{ last_page - 2 }}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ last_page - 1 }}">{{ last_page - 1 }}</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ last_page }}">{{ last_page }}</a>
+            </li>
             {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page - 1 }}">Предыдущая</a>
+            </li>
+            {% if page - 1 != 1 %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">1</a>
+            </li>
+            {% if page - 2 != 1 %}
+            <li class="page-item">
+                <a class="page-link" href="#">...</a>
+            </li>
+            {% endif %}
+            {% endif %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page - 1 }}">{{ page - 1 }}</a>
             </li>
@@ -47,6 +82,19 @@
             </li>
             <li class="page-item">
                 <a class="page-link" href="?page={{ page + 1 }}">{{ page + 1 }}</a>
+            </li>
+            {% if page + 1 != last_page %}
+            {% if page + 2 != last_page %}
+            <li class="page-item">
+                <a class="page-link" href="#">...</a>
+            </li>
+            {% endif %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ last_page }}">{{ last_page }}</a>
+            </li>
+            {% endif %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page + 1 }}">Следующая</a>
             </li>
             {% endif %}
         </ul>

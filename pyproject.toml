@@ -36,4 +36,5 @@ isort = "^7.0.0"
 flake8 = "^7.3.0"
 flake8-pyproject = "^1.2.4"
 ruff = "^0.14.10"
+pyseoanalyzer = "^2025.4.3"
 

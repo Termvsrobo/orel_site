@@ -1,10 +1,11 @@
 from typing import Optional
 
 from fastapi import FastAPI, Request
+from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from sqlmodel import Session, select, create_engine
+from sqlmodel import Session, select, create_engine, func
 
 from config import settings
 from models import Item
@@ -19,19 +20,27 @@ sitemap = SiteMap(
 )
 
 templates = Jinja2Templates(directory="templates")
+templates.env.globals.update({'title': settings.TITLE, 'description': settings.DESCRIPTION})
 
 
 @app.get("/")
 async def get_all_items(request: Request, page: Optional[int] = 1) -> HTMLResponse:
     start = (page - 1) * settings.ITEMS_PER_PAGE
     engine = create_engine(settings.DB_URL.encoded_string())
+    last_page = 1
+    # Считаем максимальное количество страниц
+    with Session(engine) as session:
+        stmt = select(func.count() // settings.ITEMS_PER_PAGE + 1).select_from(Item)
+        last_page = session.exec(stmt).first()
+    if page > last_page:
+        raise HTTPException(status_code=404)
     with Session(engine) as session:
         statement = (
             select(Item).order_by(Item.id).limit(settings.ITEMS_PER_PAGE).offset(start)
         )
         items = session.exec(statement).all()
     return templates.TemplateResponse(
-        request, "items.html", {"items": items, "page": page}
+        request, "items.html", {"items": items, "page": page, 'last_page': last_page}
     )
 
 

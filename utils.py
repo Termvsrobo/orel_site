@@ -88,6 +88,8 @@ def get_data(content) -> List[Dict[str, str]]:
             name = name_element.text.replace('Арт.: ', '')
             for to_replace in product('TТ', repeat=2):
                 name = name.replace(''.join(to_replace), '')
+            for escape_symbol in ';/?:@&=+$,':
+                name = name.replace(escape_symbol, ' ')
             images = element.parent.find('div', attrs={'class': 'image_wrapper_block js-notice-block__image'}).find_all('img')
             image_url = None
             if len(images) >= 2:

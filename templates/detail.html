@@ -1,5 +1,7 @@
 {% extends "index.html" %}
 
+{% block title %}{{ title }}: {{ item.name }}{% endblock %}
+
 {% block body_container %}
     <div class="row">
         {% if item.image %}

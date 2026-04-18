@@ -2,11 +2,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Запчасти для сельхозтехники город Орел">
-    <meta name="author" content="">
+    <meta name="description" content="{{ description }}">
+    <meta name="author" content="https://vk.ru/termvsrobo">
+
+    <meta property="og:title" content="{{ title }}"/>
+    <meta property="og:description" content="{{ description }}"/>
+    <meta property="og:image" content="/static/favicon.png"/>
+    <meta property="og:type" content="profile"/>
+    <meta property="og:url" content= "https://ru.wikipedia.org/wiki/Мэрилин_Монро"/>
+
     <link rel="icon" href="/static/favicon.png">
 
-    <title>Запчасти на сельскохозяйственную технику город Орел</title>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -35,33 +42,39 @@
                         background-position: center;
                         background-attachment: fixed;
                         weidth: 100vh;">
-    <h1 style="text-align: center;">
+    <div class="container">
         <div class="row">
-          <div class="col-md-4">
-              <a href="/"><img style="weidth:300px;height:300px" src="/static/лого 3.png"/></a>
+          <div class="col-4">
+              <a href="/"><img style="weidth:300px;height:300px" src="/static/лого 3.png" alt="{{ title }}"/></a>
           </div>
-          <div class="col-md-8 text-start">
-              <div class="flex-row"><a href="https://wa.me/79200866635"><i class="fa fa-whatsapp" aria-hidden="true"></i></a><i class="fa fa-telegram" aria-hidden="true"></i><a href="tel:+79200866635" class="text-danger">+7(920)086-66-35</a><span class="text-danger">Андрей</span></div>
-              <div class="flex-row"><a href="https://wa.me/79208138071"><i class="fa fa-whatsapp" aria-hidden="true"></i></a><i class="fa fa-telegram" aria-hidden="true"></i><a href="tel:+79208138071" class="text-danger">+7(920)813-80-71</a><span class="text-danger">Светлана</span></div>
-              <div class="flex-row"><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:backanovandrei@yandex.ru" class="text-danger">backanovandrei@yandex.ru</a></div>
-              <div class="flex-row"><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:sale-orel@mail.ru" class="text-danger">sale-orel@mail.ru</a></div>
+          <div class="col-8 text-start">
+            <h1>
+              <div class="flex-row"><a href="https://wa.me/79200866635"><i class="fa fa-whatsapp p-1" aria-hidden="true"></i></a><i class="fa fa-telegram p-1" aria-hidden="true"></i><a href="tel:+79200866635" class="text-danger">+7(920)086-66-35</a><span class="text-danger">Андрей</span></div>
+              <div class="flex-row"><a href="https://wa.me/79208138071"><i class="fa fa-whatsapp p-1" aria-hidden="true"></i></a><i class="fa fa-telegram p-1" aria-hidden="true"></i><a href="tel:+79208138071" class="text-danger">+7(920)813-80-71</a><span class="text-danger">Светлана</span></div>
+              <div class="flex-row"><i class="fa fa-envelope-o p-1" aria-hidden="true"></i><a href="mailto:backanovandrei@yandex.ru" class="text-danger">backanovandrei@yandex.ru</a></div>
+              <div class="flex-row"><i class="fa fa-envelope-o p-1" aria-hidden="true"></i><a href="mailto:sale-orel@mail.ru" class="text-danger">sale-orel@mail.ru</a></div>
+            </h1>
           </div>
         </div>
-    </h1>
-  <form action="/search" method="get">
-      <div class="form-group">
-          <label>Поиск</label>
-          <input type="search" class="form-control" placeholder="Введите OEM-номер" aria-label="Поиск" name="search">
-          <button class="btn btn-danger" type="submit">Поиск</button>
-      </div>
-  </form>
-  <div class="row align-self-center align-text-center">
-    <h1>Мы предлагаем широкий ассортимент запчастей для сельхозтехники John Deere, Claas, Case, New Holland, Lemken, Amazone, Manitou, Kuhn, G.B., ,  ПОЛЕСЬЕ, ДОН, МТЗ, БДМ-АГРО, БДТ-АГРО, БОБРУЙСКСЕЛЬМАШ, ПЕНЗАРАДИОЗАВОД, в наличии на складе в городе Орёл  и под заказ.
-Работаем для тех, кто в поле 🚜🌾🛠</h1>
-  </div>
-  {% block body_container %}
-  {% endblock %}
-  {% block pagination %}
-  {% endblock %}
+        <div class="row">
+            <form action="/search" method="get">
+                <div class="form-group">
+                    <label>Поиск</label>
+                    <input type="search" class="form-control" placeholder="Введите OEM-номер" aria-label="Поиск" name="search">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger" type="submit">Поиск</button>
+                </div>
+            </form>
+        </div>
+        <div class="row align-self-center align-text-center">
+            <h1>Мы предлагаем широкий ассортимент запчастей для сельхозтехники John Deere, Claas, Case, New Holland, Lemken, Amazone, Manitou, Kuhn, G.B., ,  ПОЛЕСЬЕ, ДОН, МТЗ, БДМ-АГРО, БДТ-АГРО, БОБРУЙСКСЕЛЬМАШ, ПЕНЗАРАДИОЗАВОД, в наличии на складе в городе Орёл  и под заказ.
+        Работаем для тех, кто в поле 🚜🌾🛠</h1>
+        </div>
+        {% block body_container %}
+        {% endblock %}
+        {% block pagination %}
+        {% endblock %}
+    </div>
 </body>
 </html>
