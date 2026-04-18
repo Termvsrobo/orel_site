@@ -82,7 +82,7 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./certbot/log:/var/log/letsencrypt
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email termvsrobo@yandex.ru --agree-tos -d xn--80aanakazbxeodpip4b1b9ek.xn--p1ai -d www.xn--80aanakazbxeodpip4b1b9ek.xn--p1ai
+    command: certonly --expand --webroot -w /var/www/certbot --force-renewal --email termvsrobo@yandex.ru --agree-tos -d xn--80aanakazbxeodpip4b1b9ek.xn--p1ai -d www.xn--80aanakazbxeodpip4b1b9ek.xn--p1ai
     restart: no
 
 volumes:
