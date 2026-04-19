@@ -70,7 +70,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d          # Nginx конфиг доменов
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Nginx конфиг
-      - ./certbot/www/.well-known/acme-challenge:/var/www/certbot            # Certbot HTTP challenge
+      - ./certbot/www:/var/www/certbot            # Certbot HTTP challenge
       - ./certbot/conf:/etc/letsencrypt           # SSL certificates
       - ./nginx/logs:/var/log/nginx
     restart: unless-stopped
