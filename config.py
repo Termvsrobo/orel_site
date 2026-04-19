@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     MARKUP_PERCENT: int = 25
     ITEMS_PER_PAGE: int = 54
     TITLE: str = 'Запчасти на сельскохозяйственную технику город Орел'
-    DESCRIPTION: str = 'Запчасти для сельхозтехники город Орел'
+    DESCRIPTION: str = 'Мы предлагаем широкий ассортимент запчастей для сельхозтехники John Deere, Claas, Case, New Holland, Lemken, Amazone, Manitou, Kuhn, G.B., ,  ПОЛЕСЬЕ, ДОН, МТЗ, БДМ-АГРО, БДТ-АГРО, БОБРУЙСКСЕЛЬМАШ, ПЕНЗАРАДИОЗАВОД, в наличии на складе в городе Орёл  и под заказ.'
 
     DB_URL: Union[PostgresDsn, AnyUrl]
     CELERY_BROKER_URL: RedisDsn
