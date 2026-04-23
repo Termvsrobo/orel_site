@@ -30,6 +30,9 @@ services:
       - db
     volumes:
       - ./media:/app/media
+      - ./static:/app/static
+      - ./templates:/app/templates
+      - ./migrations:/app/migrations
   parse:
     build: .
     command: sh -c "python celery_app.py"

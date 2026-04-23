@@ -1,9 +1,9 @@
-{% extends "index.html" %}
+{% extends "base.html"%}
 
-{% block title %}Такой страницы не существует!{% endblock %}
-
-{% block body_container %}
-    <div class="row align-self-center">
-        <p>Такой страницы не существует!</p>
-    </div>
+{% block content %}
+        <div class="row mb-5">
+            <div class="col" style="text-align: center;">
+                <p class="h1" style="font-family: 'Dirty Headline Cyrillic';color: var(--bs-light);">К сожалению, такой страницы не существует</p>
+            </div>
+        </div>
 {% endblock %}

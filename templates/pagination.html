@@ -1,0 +1,18 @@
+{% block pagination %}
+        <nav>
+            <ul class="pagination">
+                {% if page != 1 %}
+                <li class="page-item"><a class="page-link" aria-label="Next" href="?page=1{% if search %}&search={{ search }}{% endif %}"><span aria-hidden="true"><<</span></a></li>
+                <li class="page-item"><a class="page-link" aria-label="Previous" href="?page={{ page - 1 }}{% if search %}&search={{ search }}{% endif %}"><span aria-hidden="true"><</span></a></li>
+                {% endif %}
+                {% set offset = page // 6 %}
+                {% for _page in range(pagination_left, pagination_right + 1) %}
+                <li class="page-item {% if page == _page %}active{% endif %}"><a class="page-link" href="?page={{ _page }}{% if search %}&search={{ search }}{% endif %}">{{ _page }}</a></li>
+                {% endfor %}
+                {% if page != last_page %}
+                <li class="page-item"><a class="page-link" aria-label="Next" href="?page={{ page + 1 }}{% if search %}&search={{ search }}{% endif %}"><span aria-hidden="true">></span></a></li>
+                <li class="page-item"><a class="page-link" aria-label="Next" href="?page={{ last_page }}{% if search %}&search={{ search }}{% endif %}"><span aria-hidden="true">>></span></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+{% endblock %}

@@ -10,12 +10,11 @@ import zipfile
 from pathlib import Path
 from typing import Sequence, Union
 
-from alembic import op
 import sqlalchemy as sa
 import sqlmodel
+from alembic import op
 
 from models import Item
-
 
 # revision identifiers, used by Alembic.
 revision: str = '3721b59a78d9'

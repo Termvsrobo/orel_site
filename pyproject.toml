@@ -38,3 +38,6 @@ flake8-pyproject = "^1.2.4"
 ruff = "^0.14.10"
 pyseoanalyzer = "^2025.4.3"
 
+[tool.flake8]
+max_line_length = 120
+exclude = ["migrations"]

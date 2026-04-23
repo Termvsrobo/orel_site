@@ -1,102 +1,23 @@
-{% extends "index.html" %}
-
-{% block body_container %}
-        <div class="row p-3">
-        {% for item in items %}
-            <div class="col-4 align-self-center">
+{% block content %}
+        {% for row in items|batch(3) %}
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3 p-3">
+            {% for item in row %}
+            <div class="col" itemscope="" itemtype="http://schema.org/Product">
                 <div class="card">
                     {% if item.image %}
-                    <img class="card-img-top" src="/{{ item.image }}" alt="{{ item.name }}">
+                    <img class="object-fit-cover card-img-top w-100 d-block" style="height: 200px;" src="/{{ item.image }}" alt="{{ item.name }}">
                     {% else %}
-                    <img class="card-img-top" src="/static/no_image.jpeg" alt="{{ item.name }}">
+                    <img class="object-fit-cover card-img-top w-100 d-block" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="{{ item.name }}">
                     {% endif %}
-                    <div class="card-body">
+                    <div class="card-body p-4">
                         <h4 class="card-title">{{ item.name }}</h4>
-                        <p class="card-text">{{ item.in_stock }}</p>
-                        <p class="card-text"><b>{{ item.current_price }} РУБ/шт</b></p>
-                        <a href="/items/{{ item.name }}" class="btn btn-primary">Открыть</a>
+                        <p class="card-text">{{ item.is_stock }}</p>
+                        <p class="card-text">{{ item.current_price }}</p>
+                        <a itemprop="url" class="btn btn-outline-primary" href="/items/{{ item.name }}" role="button">Открыть</a>
                     </div>
                 </div>
             </div>
-        {% if loop.index % 3 == 0 %}</div><div class="row p-3">{% endif %}
-        {% endfor %}
+            {% endfor %}
         </div>
-{% endblock %}
-
-{% block pagination %}
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            {% if page==1 %}
-            <li class="page-item active">
-                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page=2">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page=3">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">...</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page={{ last_page }}">{{ last_page }}</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="?page={{ page + 1 }}">Следующая</a></li>
-            {% elif page==last_page %}
-            <li class="page-item"><a class="page-link" href="?page={{ page - 1 }}">Предыдущая</a></li>
-            <li class="page-item">
-                <a class="page-link" href="?page=1">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">...</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page={{ last_page - 2 }}">{{ last_page - 2 }}</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page={{ last_page - 1 }}">{{ last_page - 1 }}</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="?page={{ last_page }}">{{ last_page }}</a>
-            </li>
-            {% else %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page - 1 }}">Предыдущая</a>
-            </li>
-            {% if page - 1 != 1 %}
-            <li class="page-item">
-                <a class="page-link" href="?page=1">1</a>
-            </li>
-            {% if page - 2 != 1 %}
-            <li class="page-item">
-                <a class="page-link" href="#">...</a>
-            </li>
-            {% endif %}
-            {% endif %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page - 1 }}">{{ page - 1 }}</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page + 1 }}">{{ page + 1 }}</a>
-            </li>
-            {% if page + 1 != last_page %}
-            {% if page + 2 != last_page %}
-            <li class="page-item">
-                <a class="page-link" href="#">...</a>
-            </li>
-            {% endif %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ last_page }}">{{ last_page }}</a>
-            </li>
-            {% endif %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page + 1 }}">Следующая</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
+        {% endfor %}
 {% endblock %}

@@ -1,10 +1,8 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-from sqlmodel import SQLModel
-
 from alembic import context
+from sqlalchemy import engine_from_config, pool
+from sqlmodel import SQLModel
 
 from models import Item
 
@@ -13,6 +11,7 @@ from models import Item
 config = context.config
 
 from config import settings
+
 config.set_main_option('sqlalchemy.url', settings.DB_URL.encoded_string())
 
 # Interpret the config file for Python logging.

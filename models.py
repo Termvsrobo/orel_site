@@ -1,5 +1,5 @@
-from sqlmodel import SQLModel, Field
 from pydantic import FilePath
+from sqlmodel import Field, SQLModel
 
 from utils import get_current_course
 
@@ -17,5 +17,5 @@ class Item(SQLModel, table=True):
         result = '---'
         if self.price_value and self.price_currency:
             result = round(self.price_value * get_current_course(self.price_currency), 2)
-            result = str(result)
+            result = str(result) + ' РУБ/шт'
         return result

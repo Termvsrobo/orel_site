@@ -1,10 +1,10 @@
 from itertools import product
 from typing import Dict, List
 
-from cachetools import cached, TTLCache
+from bs4 import BeautifulSoup
+from cachetools import TTLCache, cached
 from httpx import Client
 from loguru import logger
-from bs4 import BeautifulSoup
 
 from config import settings
 
@@ -90,7 +90,10 @@ def get_data(content) -> List[Dict[str, str]]:
                 name = name.replace(''.join(to_replace), '')
             for escape_symbol in ';/?:@&=+$,':
                 name = name.replace(escape_symbol, ' ')
-            images = element.parent.find('div', attrs={'class': 'image_wrapper_block js-notice-block__image'}).find_all('img')
+            images = element.parent.find(
+                'div',
+                attrs={'class': 'image_wrapper_block js-notice-block__image'}
+            ).find_all('img')
             image_url = None
             if len(images) >= 2:
                 image_url = images[1].get("data-src")

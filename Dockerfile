@@ -6,9 +6,6 @@ COPY **.py .
 COPY poetry.lock .
 COPY pyproject.toml .
 COPY .env .env
-COPY migrations migrations
-COPY templates templates
-COPY static static
 COPY alembic.ini alembic.ini
 COPY data.json data.json
 RUN apt-get update && apt-get install -y nano

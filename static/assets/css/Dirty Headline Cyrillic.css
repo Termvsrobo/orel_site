@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'Dirty Headline Cyrillic';
+	src: url(../../assets/fonts/Dirty%20Headline%20Cyrillic-8314d250cc0e784fae683fbabfa22485.woff2) format('woff2'),
+	url(../../assets/fonts/Dirty%20Headline%20Cyrillic-a9c278d01fc3ed90054ee62c1ed0efcd.woff) format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: auto;
+}

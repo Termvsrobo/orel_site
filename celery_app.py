@@ -1,18 +1,17 @@
-from typing import Dict, List
 from pathlib import Path
+from typing import Dict, List
 from urllib.parse import urljoin
 
 from celery import Celery
 from celery.schedules import crontab
 from httpx import Client, TimeoutException
 from sanitize_filename import sanitize
-from sqlmodel import select, insert, create_engine, Session
+from sqlmodel import Session, create_engine, insert, select
 from tqdm import tqdm
 
 from config import settings
 from models import Item
 from utils import get_data, get_last_link
-
 
 celery_app = Celery()
 
@@ -112,6 +111,7 @@ def parse():
 @celery_app.task
 def test(arg):
     print(arg)
+
 
 if __name__ == "__main__":
     parse()
