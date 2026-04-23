@@ -10,7 +10,7 @@
                     <img class="object-fit-cover card-img-top w-100 d-block" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="{{ item.name }}">
                     {% endif %}
                     <div class="card-body p-4">
-                        <h4 class="card-title">{{ item.name }}</h4>
+                        <p class="card-title h4">{{ item.name }}</p>
                         <p class="card-text">{{ item.is_stock }}</p>
                         <p class="card-text">{{ item.current_price }}</p>
                         <a itemprop="url" class="btn btn-outline-primary" href="/items/{{ item.name }}" role="button">Открыть</a>

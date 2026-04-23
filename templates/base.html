@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <meta property="og:image" content="/static/assets/img/favicon.png">
-    <meta name="description" content="Мы предлагаем широкий ассортимент запчастей для сельхозтехники John Deere, Claas, Case, New Holland, Lemken, Amazone, Manitou, Kuhn, G.B., ,  ПОЛЕСЬЕ, ДОН, МТЗ, БДМ-АГРО, БДТ-АГРО, БОБРУЙСКСЕЛЬМАШ, ПЕНЗАРАДИОЗАВОД, в наличии на складе в городе Орёл  и под заказ.">
+    <meta name="description" content="{{ description }}">
     <meta property="og:type" content="website">
     <meta property="og:image:height" content="512">
     <meta property="og:image:width" content="512">
@@ -52,7 +52,7 @@
         <div class="input-group"><input class="form-control" type="text" id="searchInput" placeholder="Введите OEM-номер" {% if search %}value="{{ search }}"{% endif %}><button class="btn btn-secondary" id="clearInput" type="button">X</button><button class="btn btn-danger" id="search" type="submit">Найти</button></div>
         <div class="row mb-5">
             <div class="col-md-10 col-xl-8 text-center mx-auto">
-                <h2 style="font-family: 'Dirty Headline Cyrillic';color: var(--bs-light);">Мы предлагаем широкий ассортимент запчастей для сельхозтехники John Deere, Claas, Case, New Holland, Lemken, Amazone, Manitou, Kuhn, G.B., , ПОЛЕСЬЕ, ДОН, МТЗ, БДМ-АГРО, БДТ-АГРО, БОБРУЙСКСЕЛЬМАШ, ПЕНЗАРАДИОЗАВОД, в наличии на складе в городе Орёл и под заказ. Работаем для тех, кто в поле 🚜🌾🛠</h2>
+                <p class="h2" style="font-family: 'Dirty Headline Cyrillic';color: var(--bs-light);">{{ description }}</p>
             </div>
         </div>
         {% block content %}
